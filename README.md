@@ -841,5 +841,6 @@ Remember: Rust gives you a head start on security, but it's not a silver bullet.
 
 Now go forth and build systems that are not just fast and memory-safe, but actually secure. Your users' money depends on it. 🦀🔒💰
 
-## Contact 📧
-All suggestions write to yevhsec1@gmail.com
+## Contributing & Contact
+
+🙌 **Contributions welcome!** Open an issue or PR or email me at **yevhsec1@gmail.com**
