@@ -843,4 +843,5 @@ Now go forth and build systems that are not just fast and memory-safe, but actua
 
 ## Contributing & Contact
 
-🙌 **Contributions welcome!** Open an issue or PR or email me at **yevhsec1@gmail.com**
+- GitHub: <https://github.com/yevh/rust-security-handbook>  
+- Email: yevhsec1@gmail.com
