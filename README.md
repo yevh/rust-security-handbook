@@ -20,7 +20,7 @@ Rust gives you memory safety for free, but **application security** is earned th
 Every `u64` in your API is a potential million-dollar bug waiting to happen:
 
 ```rust
-// ❌ DISASTER WAITING TO HAPPEN
+// ⚠️ Three bare u64s – compiler can’t tell them apart
 fn transfer(from: u64, to: u64, amount: u64) -> Result<(), Error> {
     // What happens when a tired developer swaps these at 2 AM?
     // transfer(balance, user_id, amount) ← 💥 Goodbye money
@@ -34,22 +34,23 @@ In traditional languages, this compiles and runs. In blockchain contexts, it tra
 Wrap every meaningful primitive in a semantic type:
 
 ```rust
-// ✅ IMPOSSIBLE TO MISUSE
-#[derive(Debug, Clone, Copy, PartialEq)]
+// ✅ Type-safe: cross-type swaps won’t compile
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 struct UserId(u64);
 
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 struct Balance(u64);
 
-#[derive(Debug, Clone, Copy, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 struct TokenAmount(u64);
 
+// Cross-type swaps now fail to compile
 fn transfer(from: UserId, to: UserId, amount: TokenAmount) -> Result<(), Error> {
-    // Now it's physically impossible to swap parameters!
+    // Swapping two UserId values still compiles — keep names clear
 }
 ```
 
-**The Magic:** These wrappers disappear at compile time (zero runtime cost) but catch 100% of parameter-swapping bugs.
+**The Magic:** These wrappers vanish at compile time (zero runtime cost) while preventing cross-type parameter swaps.
 
 ### Real-World Impact: The Merkle Root Mixup
 
